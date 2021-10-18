@@ -12,3 +12,18 @@ class User(db.Model):
         self.username = username
         self.password = generate_password_hash(password)
 
+class Product(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable = False)
+    price = db.Column(db.Numeric(5,2), nullable = False)
+    image_url = db.Column(db.String(255))
+    date_created = db.Column(db.DateTime, nullable = False, default = datetime.utcnow)
+
+    def __init__(self, name, price, image_url=None):
+        self.name = name
+        self.price = price
+        self.image_url = image_url
+
+    def __repr__(self):
+        return f'<Product | {self.name}>'
+    #shows what will come out in terminal
